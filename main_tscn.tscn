@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://8xlawviypyng"]
+
+[ext_resource type="Script" uid="uid://cy7ahj8bci33h" path="res://player.gd" id="1_ghw17"]
+[ext_resource type="Script" uid="uid://d2umsj2xl0fh7" path="res://enemy.gd" id="2_m372o"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vewfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghw17"]
+size = Vector2(55, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m372o"]
+size = Vector2(1122.5, 19.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjp2p"]
+size = Vector2(66.5, 78)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fjp2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_audyb"]
+size = Vector2(45.5, 46.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kvli"]
+size = Vector2(686.5, 76)
+
+[node name="Main_tscn" type="Node2D" unique_id=1979321276]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1903676120]
+script = ExtResource("1_ghw17")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=897998578]
+position = Vector2(139, 411)
+scale = Vector2(54.999996, 88.00001)
+texture = SubResource("PlaceholderTexture2D_vewfp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=82175695]
+position = Vector2(139, 408)
+shape = SubResource("RectangleShape2D_ghw17")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2103525054]
+position = Vector2(205, 504)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=84066531]
+position = Vector2(373.75, -27.75)
+shape = SubResource("RectangleShape2D_m372o")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=2073935961]
+offset_left = -189.0
+offset_top = -39.0
+offset_right = 931.0
+offset_bottom = -18.0
+color = Color(6.256998e-07, 0.51793563, 0.18849549, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=313971582]
+position = Vector2(11, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1832471816]
+position = Vector2(305.75, 426)
+shape = SubResource("RectangleShape2D_fjp2p")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2" unique_id=13899763]
+offset_left = 272.0
+offset_top = 387.0
+offset_right = 341.0
+offset_bottom = 463.0
+
+[node name="Enemy" type="CharacterBody2D" parent="." unique_id=2026465166]
+script = ExtResource("2_m372o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=1028973050]
+position = Vector2(526.5, 435.5)
+scale = Vector2(45, 41)
+texture = SubResource("PlaceholderTexture2D_fjp2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=956017935]
+position = Vector2(526, 435)
+shape = SubResource("RectangleShape2D_audyb")
+
+[node name="Area2D" type="Area2D" parent="Enemy" unique_id=120185166]
+position = Vector2(294, 78)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D" unique_id=279210209]
+position = Vector2(401.75, 349)
+shape = SubResource("RectangleShape2D_7kvli")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1784889800]
+position = Vector2(22, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1714746034]
+position = Vector2(1051, 428)
+shape = SubResource("RectangleShape2D_fjp2p")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D3" unique_id=56500874]
+offset_left = 1016.0
+offset_top = 392.0
+offset_right = 1085.0
+offset_bottom = 468.0
+
+[connection signal="body_entered" from="Enemy/Area2D" to="Enemy" method="_on_area_2d_body_entered"]
