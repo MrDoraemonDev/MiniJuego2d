@@ -1,25 +1,30 @@
 extends CharacterBody2D
 
 # --- CONFIGURACIÓN ---
-@export var speed := 60      # velocidad del enemigo
-@export var gravity := 900   # gravedad
+@export var speed := 60
+@export var gravity := 900
 
-# --- VARIABLES INTERNAS ---
-var direction := -1          # -1 izquierda, 1 derecha
+var direction := -1  # -1 = izquierda, 1 = derecha
 
-# --- FÍSICA / MOVIMIENTO ---
+func _ready():
+	print("Enemigo listo:", name)
+	if not is_in_group("Enemies"):
+		add_to_group("Enemies")  # asegurarse de que esté en el grupo
+	print("¿Está en grupo Enemies?:", is_in_group("Enemies"))
+
 func _physics_process(delta):
-	# aplicar gravedad
+	# Gravedad
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# movimiento horizontal
+	# Movimiento horizontal
 	velocity.x = direction * speed
 
-	# mover el enemigo
 	move_and_slide()
 
-	# cambiar de dirección si choca con pared
+	# Cambiar de dirección si choca con pared
 	if is_on_wall():
+		print("Enemigo chocó con pared, cambiando dirección")
 		direction *= -1
-		$Sprite2D.flip_h = direction > 0
+		if $Sprite2D:
+			$Sprite2D.flip_h = direction > 0

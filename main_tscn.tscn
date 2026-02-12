@@ -8,6 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghw17"]
 size = Vector2(55, 88)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w50fa"]
+size = Vector2(56.5, 91.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m372o"]
 size = Vector2(1122.5, 19.5)
 
@@ -36,6 +39,12 @@ texture = SubResource("PlaceholderTexture2D_vewfp")
 position = Vector2(139, 408)
 shape = SubResource("RectangleShape2D_ghw17")
 
+[node name="Hitbox" type="Area2D" parent="Player" unique_id=1426853754]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Hitbox" unique_id=650052520]
+position = Vector2(136.75, 406.25)
+shape = SubResource("RectangleShape2D_w50fa")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2103525054]
 position = Vector2(205, 504)
 
@@ -63,7 +72,7 @@ offset_top = 387.0
 offset_right = 341.0
 offset_bottom = 463.0
 
-[node name="Enemy" type="CharacterBody2D" parent="." unique_id=2026465166]
+[node name="Enemy" type="CharacterBody2D" parent="." unique_id=2026465166 groups=["Enemies"]]
 script = ExtResource("2_m372o")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=1028973050]
@@ -95,4 +104,5 @@ offset_top = 392.0
 offset_right = 1085.0
 offset_bottom = 468.0
 
+[connection signal="body_entered" from="Player/Hitbox" to="Player" method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Enemy/Area2D" to="Enemy" method="_on_area_2d_body_entered"]
