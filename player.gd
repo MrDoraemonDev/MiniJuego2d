@@ -67,6 +67,10 @@ func die():
 
 # --- DETECCIÓN DE ENEMIGO ---
 func _on_hitbox_body_entered(body):
+	# Ignorar al propio Player
+	if body == self:
+		return
+
 	print("Detectado contacto con:", body.name)
 	print("¿Está en grupo Enemies?:", body.is_in_group("Enemies"))
 

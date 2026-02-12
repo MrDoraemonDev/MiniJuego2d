@@ -1,28 +1,31 @@
 extends CharacterBody2D
 
 # --- CONFIGURACIÓN ---
-@export var speed := 60
-@export var gravity := 900
+@export var speed := 60       # Velocidad de patrulla
+@export var gravity := 900    # Gravedad para caer al suelo
 
-var direction := -1  # -1 = izquierda, 1 = derecha
+var direction := -1           # -1 = izquierda, 1 = derecha
 
 func _ready():
 	print("Enemigo listo:", name)
+
+	# Asegurarse de que esté en el grupo "Enemies"
 	if not is_in_group("Enemies"):
-		add_to_group("Enemies")  # asegurarse de que esté en el grupo
+		add_to_group("Enemies")
 	print("¿Está en grupo Enemies?:", is_in_group("Enemies"))
 
 func _physics_process(delta):
-	# Gravedad
+	# --- Aplicar gravedad ---
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Movimiento horizontal
+	# --- Movimiento horizontal ---
 	velocity.x = direction * speed
 
+	# Mover al enemigo
 	move_and_slide()
 
-	# Cambiar de dirección si choca con pared
+	# --- Cambiar dirección al chocar con pared ---
 	if is_on_wall():
 		print("Enemigo chocó con pared, cambiando dirección")
 		direction *= -1
