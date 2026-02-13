@@ -7,7 +7,7 @@ const GRAVITY = 900.0
 
 # --- VIDA ---
 @export var max_health: int = 3
-@export var damage_cooldown: float = 1.0
+@export var damage_cooldown: float = 2.0
 
 var health: int
 var can_take_damage: bool = true
